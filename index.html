@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Manawa Techs | Nathanael Kouassi - Expert IT & Digital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+        /* ===== VARIABLES & RESET ===== */
+        :root {
+            --teal: #0d5c63;
+            --teal-light: #1a7a7a;
+            --orange: #e48807d5;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --dark: #1a1a1a;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --whatsapp: #15b44f;
+            --shadow-sm: 0 5px 20px rgba(0,0,0,0.05);
+            --shadow-md: 0 15px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            
+            /* NOUVELLES COULEURS DOMINANTES - ORANGE & BLEU */
+            --primary-blue: #0066CC;
+            --primary-blue-light: #4D94FF;
+            --primary-blue-dark: #004C99;
+            --primary-orange: #FF8C1A;
+            --primary-orange-light: #FFA64D;
+            --primary-orange-dark: #E67300;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            scroll-behavior: smooth; 
+        }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: var(--light); 
+            color: var(--dark); 
+            overflow-x: hidden; 
+            line-height: 1.6;
+        }
+
+        /* ===== NAVIGATION MOBILE FIRST ===== */
+        header {
+            position: fixed; 
+            width: 100%; 
+            padding: 15px 20px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            z-index: 1000; 
+            transition: var(--transition);
+            background: transparent;
+        }
+        
+        header.sticky { 
+            background: var(--white); 
+            box-shadow: var(--shadow-sm); 
+            padding: 10px 20px; 
+        }
+        
+        header.sticky .logo, 
+        header.sticky .nav-links a { 
+            color: var(--dark); 
+        }
+
+        .logo { 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: var(--white); 
+            text-decoration: none; 
+            line-height: 1;
+            z-index: 1001;
+        }
+        
+        .logo span { 
+            color: var(--primary-orange); 
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-links a { 
+            color: var(--white); 
+            text-decoration: none; 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            text-transform: uppercase;
+            padding: 6px 10px;
+            border-radius: 30px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        
+        .nav-links a:hover { 
+            background: var(--primary-orange);
+            color: white !important;
+        }
+        
+        .btn-cta-nav { 
+            background: var(--primary-orange); 
+            color: white !important; 
+            padding: 8px 16px !important; 
+            border-radius: 50px; 
+        }
+
+        /* ===== BOUTONS FLOTTANTS ===== */
+        .whatsapp-float {
+            position: fixed; 
+            width: 52px; 
+            height: 52px; 
+            bottom: 20px; 
+            right: 20px;
+            background-color: var(--whatsapp); 
+            color: #FFF; 
+            border-radius: 50%;
+            font-size: 26px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 2000; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            transition: var(--transition); 
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 42px;
+            height: 42px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            font-size: 18px;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center;
+            padding: 100px 20px 60px; 
+            color: white; 
+            position: relative;
+            clip-path: ellipse(170% 100% at 50% 0%);
+        }
+        
+        .hero-content { 
+            max-width: 100%; 
+            width: 100%;
+            z-index: 2; 
+            text-align: center;
+        }
+        
+        .hero-content h1 { 
+            font-size: 2.2rem; 
+            line-height: 1.2; 
+            margin: 15px 0; 
+            font-weight: 800; 
+        }
+        
+        .hero-content p {
+            font-size: 1rem;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+        
+        .hero-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .hero-btns a {
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+        }
+        
+        .hero-img { 
+            display: none; 
+        }
+
+        /* ===== SECTIONS COMMUNES ===== */
+        section { 
+            padding: 70px 20px; 
+        }
+        
+        .section-title { 
+            text-align: center; 
+            margin-bottom: 40px; 
+        }
+        
+        .section-title h2 { 
+            font-size: 1.8rem; 
+            color: var(--primary-blue); 
+            text-transform: uppercase; 
+            line-height: 1.3;
+        }
+        
+        .section-title .bar { 
+            width: 60px; 
+            height: 4px; 
+            background: var(--primary-orange); 
+            margin: 12px auto; 
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== FONDATEUR CARD - IMAGE CORRIGÉE ===== */
+        .founder-card {
+            background: var(--white); 
+            border-radius: 30px; 
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            box-shadow: var(--shadow-md); 
+            margin-top: -100px; 
+            position: relative; 
+            z-index: 10; 
+        }
+        
+        .founder-img-box {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+        
+        .founder-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 20px;
+            background: linear-gradient(145deg, var(--primary-blue), var(--primary-blue-dark));
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 8px solid var(--primary-orange);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .founder-img i {
+            font-size: 8rem;
+            color: rgba(255,255,255,0.92);
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.2);
+            display: block;
+            max-width: 100%;
+        }
+        
+        .founder-img-box .badge-founder {
+            position: absolute; 
+            bottom: -5px;
+            right: 10px; 
+            background: var(--primary-orange); 
+            color: white; 
+            padding: 8px 20px; 
+            border-radius: 40px; 
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 8px 15px rgba(255,140,26,0.35);
+            z-index: 5;
+            border: 3px solid white;
+            letter-spacing: 1px;
+        }
+        
+        .founder-info {
+            text-align: center;
+        }
+        
+        .founder-info h2 { 
+            color: var(--primary-blue); 
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .tech-stack { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .tech-item { 
+            background: #edf2f7; 
+            padding: 6px 16px; 
+            border-radius: 50px; 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            color: var(--primary-blue);
+            transition: var(--transition);
+        }
+        
+        .tech-item:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* ===== GRILLES RESPONSIVES ===== */
+        .grid-box { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 20px; 
+        }
+        
+        .card { 
+            background: white; 
+            padding: 30px 25px; 
+            border-radius: 20px; 
+            transition: var(--transition); 
+            border: 1px solid #eee; 
+            height: 100%; 
+        }
+        
+        .card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: var(--shadow-md); 
+            border-color: var(--primary-orange); 
+        }
+        
+        .card i { 
+            font-size: 2.2rem; 
+            color: var(--primary-orange); 
+            margin-bottom: 15px; 
+            display: block; 
+        }
+        
+        .card h3 { 
+            margin-bottom: 12px; 
+            color: var(--primary-blue); 
+            font-size: 1.3rem;
+        }
+        
+        .card h4 {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+        }
+        
+        .card p { 
+            font-size: 0.9rem; 
+            color: var(--gray); 
+            line-height: 1.6; 
+        }
+
+        /* ===== PACKS TARIFAIRES ===== */
+        .price-card { 
+            text-align: left !important; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        .price-card.featured { 
+            border: 2px solid var(--primary-orange); 
+            transform: scale(1);
+            box-shadow: 0 10px 25px rgba(255,140,26,0.15);
+        }
+        
+        .price { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            color: var(--primary-blue); 
+            margin: 15px 0; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 15px; 
+        }
+        
+        .price span { 
+            font-size: 0.9rem; 
+            color: var(--gray); 
+            font-weight: 400; 
+        }
+        
+        .card ul { 
+            list-style: none; 
+            margin-top: 20px; 
+        }
+        
+        .card ul li { 
+            margin-bottom: 12px; 
+            font-size: 0.85rem; 
+            display: flex; 
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .card ul li i { 
+            font-size: 0.95rem; 
+            color: var(--whatsapp); 
+            margin-bottom: 0; 
+            width: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .packs-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .pack-category {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #d1d5db;
+        }
+        
+        .pack-category h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .pack-category h3 i {
+            color: var(--primary-orange);
+        }
+
+        /* ===== FAQ INTERACTIVE ===== */
+        .faq-container { 
+            max-width: 100%; 
+            margin: 0 auto; 
+        }
+        
+        .faq-item { 
+            background: var(--white); 
+            margin-bottom: 12px; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            border: 1px solid #eee;
+            transition: var(--transition);
+        }
+        
+        .faq-question { 
+            padding: 18px 20px; 
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            cursor: pointer; 
+            background: none; 
+            border: none; 
+            text-align: left; 
+            font-family: 'Poppins'; 
+            font-weight: 600; 
+            color: var(--primary-blue); 
+            transition: 0.3s; 
+            font-size: 0.95rem;
+            gap: 15px;
+        }
+        
+        .faq-question i { 
+            transition: 0.4s; 
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .faq-answer { 
+            padding: 0 20px; 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            background: var(--white); 
+        }
+        
+        .faq-answer p { 
+            padding: 0 0 20px 0; 
+            font-size: 0.9rem; 
+            color: var(--gray); 
+            line-height: 1.7; 
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease 0.1s;
+        }
+        
+        .faq-item.active { 
+            border-color: var(--primary-blue);
+            box-shadow: 0 5px 20px rgba(0,102,204,0.08); 
+        }
+        
+        .faq-item.active .faq-answer { 
+            max-height: 600px; 
+        }
+        
+        .faq-item.active .faq-answer p { 
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .faq-item.active .faq-question { 
+            color: var(--primary-orange); 
+        }
+        
+        .faq-item.active i { 
+            transform: rotate(180deg); 
+            color: var(--primary-orange); 
+        }
+
+        /* ===== FOOTER ===== */
+        footer { 
+            background: var(--primary-blue-dark); 
+            color: white; 
+            padding: 60px 20px 20px; 
+        }
+        
+        .footer-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 35px; 
+        }
+        
+        .footer-col { 
+            text-align: center; 
+        }
+        
+        .footer-col h4 { 
+            color: var(--primary-orange); 
+            margin-bottom: 15px; 
+            font-size: 1.2rem;
+        }
+        
+        .footer-col a { 
+            color: #cbd5e1; 
+            text-decoration: none; 
+            display: block; 
+            margin-bottom: 10px; 
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .footer-col a:hover {
+            color: var(--primary-orange);
+            transform: translateX(5px);
+        }
+        
+        .footer-col p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .footer-col i {
+            color: var(--primary-orange);
+            width: 20px;
+        }
+
+        /* ===== MEDIA QUERIES ===== */
+        @media (min-width: 768px) {
+            header {
+                padding: 20px 5%;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .nav-links a {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+            }
+            
+            .hero {
+                padding: 0 5%;
+                clip-path: ellipse(150% 100% at 50% 0%);
+            }
+            
+            .hero-content {
+                max-width: 650px;
+                text-align: left;
+            }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-btns {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+            
+            .hero-btns a {
+                width: auto;
+            }
+            
+            section {
+                padding: 90px 5%;
+            }
+            
+            .grid-box {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .founder-card {
+                padding: 40px;
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .founder-info {
+                text-align: left;
+            }
+            
+            .tech-stack {
+                justify-content: flex-start;
+            }
+            
+            .packs-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                text-align: left;
+            }
+            
+            .footer-col {
+                text-align: left;
+            }
+            
+            .footer-col p {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-img { 
+                display: block; 
+                position: absolute; 
+                right: 0; 
+                top: 0; 
+                width: 45%; 
+                height: 100%;
+                background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80') center / cover no-repeat;
+                clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+            }
+            
+            .hero-content h1 {
+                font-size: 3.8rem;
+            }
+            
+            .grid-box {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .packs-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .price-card.featured {
+                transform: scale(1.03);
+            }
+        }
+
+        @media (min-width: 1440px) {
+            section {
+                padding: 100px 8%;
+            }
+            
+            .hero {
+                padding: 0 8%;
+            }
+            
+            .hero-img {
+                width: 50%;
+            }
+            
+            .packs-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.9rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+            
+            .founder-info h2 {
+                font-size: 1.6rem;
+            }
+            
+            .card {
+                padding: 25px 20px;
+            }
+            
+            .price {
+                font-size: 1.6rem;
+            }
+            
+            .pack-category h3 {
+                font-size: 1.3rem;
+            }
+            
+            .faq-question {
+                font-size: 0.9rem;
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav-links a {
+                font-size: 0.7rem;
+                padding: 5px 8px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.7rem;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ===== UTILITAIRES ===== */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn-primary {
+            background: var(--primary-orange);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-orange-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-blue);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        button, a {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* AJOUTS SUPPLÉMENTAIRES POUR RENFORCER L'HARMONIE ORANGE/BLEU */
+        .btn-primary[style*="background:var(--teal)"] {
+            background: var(--primary-blue) !important;
+        }
+        
+        a[style*="color:var(--teal)"] {
+            color: var(--primary-blue) !important;
+        }
+        
+        [style*="background:var(--teal)"] {
+            background: var(--primary-blue) !important;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/2250708432172" class="whatsapp-float" target="_blank" aria-label="Contact WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <div class="back-to-top" id="backToTop" aria-label="Retour en haut">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <header id="navbar">
+        <a href="#accueil" class="logo">MANAWA <span>TECHS</span></a>
+        <nav class="nav-links">
+            <a href="#accueil">Accueil</a>
+            <a href="#fondateur">Fondateur</a>
+            <a href="#expertises">Expertises</a>
+            <a href="#tarifs">Packs</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact" class="btn-cta-nav">Contact</a>
+        </nav>
+    </header>
+
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <span style="font-family:'Playfair Display'; font-style:italic; color:var(--primary-orange); font-size:1.1rem;">
+                L'aide-informatique de votre transformation digitale
+            </span>
+            <h1>L'architecture de votre Succès Numérique</h1>
+            <p style="font-size:1rem; max-width:600px; margin-left:auto; margin-right:auto;">
+                Leader en intégration Odoo, administration systèmes et imprimerie numérique en Côte d'Ivoire. Nous bâtissons des bases technologiques solides.
+            </p>
+            <div class="hero-btns">
+                <a href="#expertises" class="btn btn-primary" style="background:var(--primary-orange); color:white; text-decoration:none; padding:14px 30px;">
+                    Nos Services
+                </a>
+                <a href="#contact" style="color:white; font-weight:600; text-decoration:none; display:flex; align-items:center; gap:8px;">
+                    Discutons du projet <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="hero-img" aria-label="Équipe de développeurs au travail"></div>
+    </section>
+
+    <!-- SECTION FONDATEUR -->
+    <section id="fondateur" class="founder-section">
+        <div class="founder-card">
+            <div class="founder-img-box">
+                <div class="founder-img">
+                    <i class="fas fa-user-tie"><img src="assets/img/img.png" alt=""></i>
+                </div>
+                <div class="badge-founder">Fondateur</div>
+            </div>
+            <div class="founder-info">
+                <h2>Nathanael Kouassi</h2>
+                <p style="margin: 15px 0; color: var(--gray);">
+                    Expert IT avec une Licence en Informatique, spécialisé dans l'assistance technique réelle. Mon approche combine rigueur logicielle et solutions matérielles concrètes.
+                </p>
+                
+                <h4 style="margin-top:20px; color:var(--primary-blue);">Maîtrise Technologique :</h4>
+                <div class="tech-stack">
+                    <div class="tech-item">Odoo ERP</div>
+                    <div class="tech-item">Linux & Windows Server</div>
+                    <div class="tech-item">Windev / Webdev</div>
+                    <div class="tech-item">Imprimerie Numérique</div>
+                    <div class="tech-item">Virtualisation</div>
+                    <div class="tech-item">Graphisme (Adobe)</div>
+                    <div class="tech-item">Intelligence Artificielle</div>
+                    <div class="tech-item">Infrastructure Cloud</div>
+                </div>
+
+                <div style="margin-top:30px; display:flex; gap:20px; flex-wrap: wrap; justify-content:center; align-items:center;">
+                    <a href="#" class="btn" style="background:var(--primary-blue); color:white; text-decoration:none; padding:12px 25px; border-radius:50px;">
+                        Voir Portfolio
+                    </a>
+                    <a href="https://wa.me/2250708432172" style="color:var(--whatsapp); font-weight:bold; display:flex; align-items:center; gap:8px; text-decoration:none;">
+                        <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i> Contact Direct
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertises" style="background: #f0f4f4;">
+        <div class="section-title">
+            <h2>Nos Expertises</h2>
+            <div class="bar"></div>
+            <p>Une offre complète pour couvrir tous vos besoins technologiques.</p>
+        </div>
+        <div class="grid-box">
+            <div class="card">
+                <i class="fas fa-project-diagram"></i>
+                <h3>Odoo & ERP</h3>
+                <p>Déploiement de modules Ventes, Stocks, Comptabilité et CRM. Automatisez vos processus métiers simplement.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-server"></i>
+                <h3>Admin. Systèmes</h3>
+                <p>Installation, configuration et sécurisation de serveurs Windows et Linux (Debian, Ubuntu, CentOS).</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-print"></i>
+                <h3>Imprimerie Numérique</h3>
+                <p>Impression grand format sur Bâche, Vinyle, One-Way et découpe personnalisée pour votre visibilité.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-code"></i>
+                <h3>Développement Web</h3>
+                <p>Création de sites vitrines et applications métiers sur mesure adaptés au marché ivoirien.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Sécurité & Réseaux</h3>
+                <p>Mise en place de VPN, pare-feu (Firewall) et optimisation de la connectivité de vos bureaux.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Formation & Coaching</h3>
+                <p>Transfert de compétences sur Odoo, la maintenance informatique et les outils de design graphique.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tarifs">
+        <div class="section-title">
+            <h2>13 Packs de Services Complets</h2>
+            <div class="bar"></div>
+            <p>Des solutions adaptées à tous vos besoins, avec une harmonie visuelle orange & bleu</p>
+        </div>
+        
+        <!-- Catégorie Odoo -->
+        <div class="pack-category">
+            <h3><i class="fas fa-project-diagram"></i> Solutions Odoo & ERP</h3>
+            <div class="packs-container">
+                <div class="card price-card">
+                    <h4>Pack Odoo Start</h4>
+                    <div class="price">150 000 <span>CFA</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Installation de base Odoo</li>
+                        <li><i class="fas fa-check-circle"></i> Configuration de 2 modules</li>
+                        <li><i class="fas fa-check-circle"></i> Formation utilisateur (2h)</li>
+                        <li><i class="fas fa-check-circle"></i> Support 1 mois</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Commander
+                    </a>
+                </div>
+                
+                <div class="card price-card featured">
+                    <div style="background:var(--primary-orange); color:white; position:absolute; top:15px; right:-35px; transform:rotate(45deg); width:150px; font-size:0.75rem; font-weight:bold; padding:6px 0; text-align:center; letter-spacing:1px;">
+                        POPULAIRE
+                    </div>
+                    <h4 style="color:var(--primary-orange);">Pack Odoo Business</h4>
+                    <div class="price">450 000 <span>CFA</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Audit complet des processus</li>
+                        <li><i class="fas fa-check-circle"></i> 5 modules configurés</li>
+                        <li><i class="fas fa-check-circle"></i> Hébergement 6 mois inclus</li>
+                        <li><i class="fas fa-check-circle"></i> Formation équipe (8h)</li>
+                        <li><i class="fas fa-check-circle"></i> Support 6 mois</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-orange);">
+                        Demander un Audit
+                    </a>
+                </div>
+                
+                <div class="card price-card">
+                    <h4>Pack Odoo Enterprise</h4>
+                    <div class="price">Sur Devis</div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Développement sur mesure</li>
+                        <li><i class="fas fa-check-circle"></i> Intégration API tierces</li>
+                        <li><i class="fas fa-check-circle"></i> Migration données</li>
+                        <li><i class="fas fa-check-circle"></i> Hébergement dédié</li>
+                        <li><i class="fas fa-check-circle"></i> Support prioritaire 12 mois</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Devis Personnalisé
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Catégorie IA -->
+        <div class="pack-category">
+            <h3><i class="fas fa-robot"></i> Intelligence Artificielle</h3>
+            <div class="packs-container">
+                <div class="card price-card">
+                    <h4>Pack IA Découverte</h4>
+                    <div class="price">75 000 <span>CFA</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Audit potentiel IA</li>
+                        <li><i class="fas fa-check-circle"></i> Présentation des solutions</li>
+                        <li><i class="fas fa-check-circle"></i> Installation outils de base</li>
+                        <li><i class="fas fa-check-circle"></i> Workshop découverte (2h)</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Découvrir l'IA
+                    </a>
+                </div>
+                
+                <div class="card price-card">
+                    <h4>Pack IA Automatisation</h4>
+                    <div class="price">250 000 <span>CFA</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Chatbot intelligent</li>
+                        <li><i class="fas fa-check-circle"></i> Automatisation des emails</li>
+                        <li><i class="fas fa-check-circle"></i> OCR pour documents</li>
+                        <li><i class="fas fa-check-circle"></i> Intégration Odoo</li>
+                        <li><i class="fas fa-check-circle"></i> Formation 4h</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Automatiser
+                    </a>
+                </div>
+                
+                <div class="card price-card">
+                    <h4>Pack IA Avancé</h4>
+                    <div class="price">Sur Devis</div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Analyse prédictive</li>
+                        <li><i class="fas fa-check-circle"></i> Reconnaissance image/vidéo</li>
+                        <li><i class="fas fa-check-circle"></i> Modèles personnalisés</li>
+                        <li><i class="fas fa-check-circle"></i> Support technique avancé</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Solution Avancée
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Catégorie Imprimerie -->
+        <div class="pack-category">
+            <h3><i class="fas fa-print"></i> Imprimerie Numérique</h3>
+            <div class="packs-container">
+                <div class="card price-card">
+                    <h4>Pack Identité Visuelle</h4>
+                    <div class="price">75 000 <span>CFA</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Création de Logo Premium</li>
+                        <li><i class="fas fa-check-circle"></i> Design Cartes de Visite</li>
+                        <li><i class="fas fa-check-circle"></i> Maquette Bâche (Grand Format)</li>
+                        <li><i class="fas fa-check-circle"></i> Fichiers Sources Fournis</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Commander
+                    </a>
+                </div>
+                
+                <div class="card price-card">
+                    <h4>Pack Signalétique</h4>
+                    <div class="price">120 000 <span>CFA</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> 2 Bâches 3x2m</li>
+                        <li><i class="fas fa-check-circle"></i> 10 Stickers vitrine</li>
+                        <li><i class="fas fa-check-circle"></i> 50 Flyers recto/verso</li>
+                        <li><i class="fas fa-check-circle"></i> Installation sur site</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Équiper ma boutique
+                    </a>
+                </div>
+                
+                <div class="card price-card">
+                    <h4>Pack Événementiel</h4>
+                    <div class="price">200 000 <span>CFA</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Roll-up personnalisé</li>
+                        <li><i class="fas fa-check-circle"></i> Kakémono 2x1m</li>
+                        <li><i class="fas fa-check-circle"></i> 100 Flyers + 50 Cartes</li>
+                        <li><i class="fas fa-check-circle"></i> Design complet événement</li>
+                        <li><i class="fas fa-check-circle"></i> Livraison express</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Préparer mon événement
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Catégorie Web & Infra -->
+        <div class="pack-category">
+            <h3><i class="fas fa-laptop-code"></i> Web & Infrastructure</h3>
+            <div class="packs-container">
+                <div class="card price-card">
+                    <h4>Pack Site Vitrine</h4>
+                    <div class="price">250 000 <span>CFA</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Site web 5 pages</li>
+                        <li><i class="fas fa-check-circle"></i> Design responsive</li>
+                        <li><i class="fas fa-check-circle"></i> Hébergement 1 an</li>
+                        <li><i class="fas fa-check-circle"></i> Nom de domaine .ci</li>
+                        <li><i class="fas fa-check-circle"></i> Formulaire de contact</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Créer mon site
+                    </a>
+                </div>
+                
+                <div class="card price-card">
+                    <h4>Pack Maintenance IT</h4>
+                    <div class="price">45 000 fcfa <span>/mois</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Maintenance Préventive</li>
+                        <li><i class="fas fa-check-circle"></i> Support à Distance & Site</li>
+                        <li><i class="fas fa-check-circle"></i> Gestion des Sauvegardes</li>
+                        <li><i class="fas fa-check-circle"></i> Mise à jour Sécurité</li>
+                        <li><i class="fas fa-check-circle"></i> Intervention d'urgence</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        S'abonner
+                    </a>
+                </div>
+                
+                <div class="card price-card">
+                    <h4>Pack Infra Cloud</h4>
+                    <div class="price">95 000 fcfa<span>/mois</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Serveur Cloud dédié</li>
+                        <li><i class="fas fa-check-circle"></i> Sauvegarde automatique</li>
+                        <li><i class="fas fa-check-circle"></i> Surveillance 24/7</li>
+                        <li><i class="fas fa-check-circle"></i> Certificat SSL</li>
+                        <li><i class="fas fa-check-circle"></i> Support technique avancé</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Migrer vers le Cloud
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ===== SECTION CORRIGÉE : Formation & Accompagnement (7 packs) ===== -->
+        <div class="pack-category">
+            <h3><i class="fas fa-graduation-cap"></i> Formation & Accompagnement Informatique</h3>
+            <div class="packs-container">
+                
+                <!-- Pack Formation Odoo -->
+                <div class="card price-card">
+                    <h4>Pack Formation Odoo</h4>
+                    <div class="price">80 000 fcfa <span>/personne</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Formation complète 8h</li>
+                        <li><i class="fas fa-check-circle"></i> Support après formation</li>
+                        <li><i class="fas fa-check-circle"></i> Supports pédagogiques</li>
+                        <li><i class="fas fa-check-circle"></i> Accès plateforme e-learning</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Formation Odoo
+                    </a>
+                </div>
+
+                <!-- Pack Initiation Informatique -->
+                <div class="card price-card">
+                    <h4>Pack Initiation Informatique</h4>
+                    <div class="price">45 000 fcfa <span>/personne</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Découverte du matériel (PC, imprimante, réseau)</li>
+                        <li><i class="fas fa-check-circle"></i> Comprendre Windows/macOS – bases essentielles</li>
+                        <li><i class="fas fa-check-circle"></i> Gestion des fichiers et dossiers</li>
+                        <li><i class="fas fa-check-circle"></i> Navigation internet & sécurité en ligne</li>
+                        <li><i class="fas fa-check-circle"></i> Atelier pratique – prise en main autonome</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Je débute
+                    </a>
+                </div>
+
+                <!-- Pack Suite Microsoft Office -->
+                <div class="card price-card">
+                    <h4>Pack Suite Microsoft Office</h4>
+                    <div class="price">65 000 fcfa <span>/personne</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Word : courriers, rapports, mise en page pro</li>
+                        <li><i class="fas fa-check-circle"></i> Excel : tableaux, calculs, graphiques simples</li>
+                        <li><i class="fas fa-check-circle"></i> PowerPoint : présentations percutantes</li>
+                        <li><i class="fas fa-check-circle"></i> Outlook : gérer ses emails et agenda</li>
+                        <li><i class="fas fa-check-circle"></i> Exercices concrets & cas pratiques</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Maîtriser Office
+                    </a>
+                </div>
+
+                <!-- Pack Installation Systèmes d'Exploitation -->
+                <div class="card price-card">
+                    <h4>Pack Installation OS</h4>
+                    <div class="price">35 000 fcfa <span>/session</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Installation Windows 10/11 pas à pas</li>
+                        <li><i class="fas fa-check-circle"></i> Installation Ubuntu / Linux Mint</li>
+                        <li><i class="fas fa-check-circle"></i> Configuration des pilotes (drivers)</li>
+                        <li><i class="fas fa-check-circle"></i> Mise à jour et paramétrages essentiels</li>
+                        <li><i class="fas fa-check-circle"></i> Support post-installation (1 semaine)</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Installer mon OS
+                    </a>
+                </div>
+
+                <!-- Pack Logiciels Utilitaires & Configuration -->
+                <div class="card price-card">
+                    <h4>Pack Logiciels & Configuration</h4>
+                    <div class="price">25 000 fcfa <span>/session</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Installation antivirus (Avast, Bitdefender)</li>
+                        <li><i class="fas fa-check-circle"></i> Suite bureautique (LibreOffice, OnlyOffice)</li>
+                        <li><i class="fas fa-check-circle"></i> Navigateurs, lecteurs PDF</li>
+                        <li><i class="fas fa-check-circle"></i> Configuration logiciels métier (compta, design)</li>
+                        <li><i class="fas fa-check-circle"></i> Nettoyage et optimisation du PC</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Optimiser mon PC
+                    </a>
+                </div>
+
+                <!-- Pack Clé Bootable & Dépannage -->
+                <div class="card price-card">
+                    <h4>Pack Clé Bootable & Dépannage</h4>
+                    <div class="price">15 000 fcfa <span>/clé</span></div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Création clé USB bootable Windows</li>
+                        <li><i class="fas fa-check-circle"></i> Création clé USB bootable Linux</li>
+                        <li><i class="fas fa-check-circle"></i> Outils de récupération intégrés</li>
+                        <li><i class="fas fa-check-circle"></i> Tutoriel pas à pas + assistance</li>
+                        <li><i class="fas fa-check-circle"></i> Clé USB 16Go fournie (option)</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-blue);">
+                        Créer ma clé
+                    </a>
+                </div>
+
+                <!-- Pack Formation Sur-Mesure (Entreprise) -->
+                <div class="card price-card featured">
+                    <div style="background:var(--primary-orange); color:white; position:absolute; top:15px; right:-35px; transform:rotate(45deg); width:150px; font-size:0.75rem; font-weight:bold; padding:6px 0; text-align:center; letter-spacing:1px;">
+                        SUR-MESURE
+                    </div>
+                    <h4 style="color:var(--primary-orange);">Pack Formation Sur-Mesure</h4>
+                    <div class="price">Sur Devis</div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Programme adapté à votre équipe</li>
+                        <li><i class="fas fa-check-circle"></i> Formateur dédié (présentiel ou distant)</li>
+                        <li><i class="fas fa-check-circle"></i> Thèmes au choix : OS, Office, IA, Odoo...</li>
+                        <li><i class="fas fa-check-circle"></i> Support illimité pendant 1 mois</li>
+                        <li><i class="fas fa-check-circle"></i> Attestation de formation</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:25px; text-align:center; background:var(--primary-orange);">
+                        Demander un devis
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <!-- ===== FIN SECTION CORRIGÉE ===== -->
+        
+    </section>
+
+    <section id="faq" style="background: #ffffff;">
+        <div class="section-title">
+            <h2>Foire Aux Questions</h2>
+            <div class="bar"></div>
+            <p>Tout ce que vous devez savoir sur nos services numériques.</p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">Pourquoi choisir Odoo pour mon entreprise en Côte d'Ivoire ? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>Odoo est un ERP tout-en-un ultra-flexible. Il permet de centraliser vos ventes, vos stocks et votre comptabilité sur une seule plateforme accessible partout. Il est particulièrement adapté au marché local car il évolue avec la taille de votre entreprise.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Quels sont les délais pour une impression grand format ? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>Pour les bâches, vinyles et supports publicitaires, nos délais varient entre 24h et 72h selon la complexité du design et la quantité demandée. Nous offrons un service express pour les urgences.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Proposez-vous des solutions d'Intelligence Artificielle ? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>Oui, nous intégrons des outils d'IA pour automatiser la saisie de données (OCR), l'analyse prédictive de vos stocks dans Odoo ou encore la mise en place de Chatbots intelligents pour votre service client. Nos packs IA sont adaptés aux entreprises locales.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Comment fonctionne le support technique après livraison ? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>Nous offrons un support réactif via WhatsApp, accès à distance ou intervention sur site. Chaque projet inclut généralement une période de garantie et de maintenance gratuite pour assurer une transition fluide. Nos abonnements mensuels incluent un support illimité.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Formez-vous les équipes à l'utilisation des outils numériques ? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>Absolument. Le transfert de compétences est au cœur de notre métier. Nous formons vos collaborateurs sur l'utilisation d'Odoo, la cybersécurité de base et les outils collaboratifs modernes. Nos formations sont pratiques et adaptées au contexte local.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Quelle est la différence entre vos packs Odoo ? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>Le pack Start est idéal pour les petites entreprises qui débutent avec Odoo. Le pack Business, notre plus populaire, convient aux PME avec des besoins avancés. Le pack Enterprise est sur mesure pour les grandes entreprises nécessitant des développements spécifiques et un support premium.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Proposez-vous des solutions cloud pour les entreprises ? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>Oui, notre pack Infra Cloud inclut des serveurs dédiés, des sauvegardes automatiques et une surveillance 24/7. Nous aidons les entreprises à migrer vers le cloud en toute sécurité, avec un support technique spécialisé pour l'environnement cloud africain.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="color:white;">MANAWA <span>TECHS</span></a>
+                <p style="margin-top:20px; font-size:0.95rem; opacity:0.9;">
+                    L'excellence technologique au service du terrain ivoirien.
+                </p>
+                <p style="margin-top:10px; font-size:0.8rem; color:#cbd5e1;">
+                    Harmonisation orange & bleu, solutions complètes, accompagnement sur mesure.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <a href="#fondateur">À propos</a>
+                <a href="#expertises">Expertises</a>
+                <a href="#tarifs">Nos 13 Packs</a>
+                <a href="#faq">FAQ Interactive</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contactez-nous</h4>
+                <p><i class="fas fa-phone"></i> +225 07 08 43 21 72</p>
+                <p><i class="fas fa-envelope"></i> contact@manawatechs.ci</p>
+                <p><i class="fas fa-map-marker-alt"></i> San-Pedro / Abidjan, CI</p>
+                <div style="margin-top:20px;">
+                    <a href="#faq" style="background:var(--primary-orange); color:white; padding:10px 20px; border-radius:50px; text-decoration:none; font-size:0.85rem; display:inline-block; transition:var(--transition);">
+                        <i class="fas fa-question-circle"></i> Consulter la FAQ
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align:center; border-top:1px solid rgba(255,255,255,0.1); padding-top:25px; margin-top:40px;">
+            <p>&copy; 2026 MANAWA TECHS | Nathanael Kouassi</p>
+            <p style="font-size:0.75rem; color:#cbd5e1; margin-top:8px;">
+                Site optimisé pour mobile • Design orange & bleu • 13 packs complets crée par Nathanael Kouassi.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky Header optimisé
+        window.addEventListener("scroll", function(){
+            var header = document.querySelector("#navbar");
+            if (window.scrollY > 30) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+            
+            var backToTop = document.getElementById("backToTop");
+            if (window.scrollY > 300) {
+                backToTop.classList.add("show");
+            } else {
+                backToTop.classList.remove("show");
+            }
+        });
+
+        // FAQ Toggle
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        function closeAllFaqs(exceptItem = null) {
+            faqItems.forEach(item => {
+                if (item !== exceptItem) {
+                    item.classList.remove('active');
+                    const answerP = item.querySelector('.faq-answer p');
+                    if (answerP) {
+                        answerP.style.opacity = '0';
+                        answerP.style.transform = 'translateY(-10px)';
+                    }
+                }
+            });
+        }
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isActive = item.classList.contains('active');
+                
+                if (isActive) {
+                    item.classList.remove('active');
+                    const answerP = item.querySelector('.faq-answer p');
+                    if (answerP) {
+                        answerP.style.opacity = '0';
+                        answerP.style.transform = 'translateY(-10px)';
+                    }
+                } else {
+                    closeAllFaqs(item);
+                    item.classList.add('active');
+                    setTimeout(() => {
+                        const answerP = item.querySelector('.faq-answer p');
+                        if (answerP) {
+                            answerP.style.opacity = '1';
+                            answerP.style.transform = 'translateY(0)';
+                        }
+                    }, 50);
+                }
+            });
+        });
+
+        // Scroll Reveal
+        if (typeof ScrollReveal !== 'undefined') {
+            const sr = ScrollReveal({ 
+                origin: 'bottom', 
+                distance: window.innerWidth < 768 ? '20px' : '40px', 
+                duration: 1200, 
+                reset: false,
+                mobile: true
+            });
+            sr.reveal('.hero-content', {origin: window.innerWidth < 768 ? 'bottom' : 'left', delay: 200});
+            sr.reveal('.founder-card', {delay: 300});
+            sr.reveal('.card', {interval: 100});
+            sr.reveal('.faq-item', {interval: 80});
+            sr.reveal('.pack-category', {interval: 150});
+        }
+
+        // Bouton retour en haut
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navigation fluide
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    e.preventDefault();
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight - 15;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
