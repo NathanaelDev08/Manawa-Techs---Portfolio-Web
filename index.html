@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
     <style>
         /* ===== VARIABLES & RESET ===== */
@@ -545,6 +546,61 @@
             color: var(--primary-orange); 
         }
 
+        /* ===== LOADER POUR CAPTURE ===== */
+        .capture-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .capture-loader.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .loader-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 90%;
+        }
+        
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--gray-light);
+            border-top-color: var(--primary-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loader-content p {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .loader-content small {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
         /* ===== FOOTER ===== */
         footer { 
             background: var(--primary-blue-dark); 
@@ -834,12 +890,22 @@
 </head>
 <body>
 
-    <a href="https://wa.me/2250708432172" class="whatsapp-float" target="_blank" aria-label="Contact WhatsApp">
+    <!-- Bouton WhatsApp flottant avec le nouveau numéro -->
+    <a href="https://wa.me/2250797969475" class="whatsapp-float" target="_blank" aria-label="Contact WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
     
     <div class="back-to-top" id="backToTop" aria-label="Retour en haut">
         <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Loader pour la capture d'écran -->
+    <div class="capture-loader" id="captureLoader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>Préparation de votre demande...</p>
+            <small>Génération de la capture d'écran du pack</small>
+        </div>
     </div>
 
     <header id="navbar">
@@ -906,7 +972,8 @@
                     <a href="#" class="btn" style="background:var(--primary-blue); color:white; text-decoration:none; padding:12px 25px; border-radius:50px;">
                         Voir Portfolio
                     </a>
-                    <a href="https://wa.me/2250708432172" style="color:var(--whatsapp); font-weight:bold; display:flex; align-items:center; gap:8px; text-decoration:none;">
+                    <!-- Lien WhatsApp direct avec le nouveau numéro -->
+                    <a href="https://wa.me/2250797969475" style="color:var(--whatsapp); font-weight:bold; display:flex; align-items:center; gap:8px; text-decoration:none;">
                         <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i> Contact Direct
                     </a>
                 </div>
@@ -966,7 +1033,7 @@
         <div class="pack-category">
             <h3><i class="fas fa-tools"></i> Maintenance & Dépannage Express</h3>
             <div class="packs-container">
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Dépannage Rapid" data-pack-price="5 000 CFA">
                     <h4>Pack Dépannage Rapid</h4>
                     <div class="price">5 000 <span>CFA</span></div>
                     <ul>
@@ -976,7 +1043,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Diagnostic</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Nettoyage PC" data-pack-price="7 500 CFA">
                     <h4>Pack Nettoyage PC</h4>
                     <div class="price">7 500 <span>CFA</span></div>
                     <ul>
@@ -986,7 +1053,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Nettoyer</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Accélération PC" data-pack-price="9 000 CFA">
                     <h4>Pack Accélération PC</h4>
                     <div class="price">9 000 <span>CFA</span></div>
                     <ul>
@@ -996,7 +1063,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Accélérer</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Suppression Virus" data-pack-price="12 000 CFA">
                     <h4>Pack Suppression Virus</h4>
                     <div class="price">12 000 <span>CFA</span></div>
                     <ul>
@@ -1006,7 +1073,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Nettoyer virus</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Récupération Fichiers" data-pack-price="15 000 CFA">
                     <h4>Pack Récupération Fichiers</h4>
                     <div class="price">15 000 <span>CFA</span></div>
                     <ul>
@@ -1016,7 +1083,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Récupérer</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Installation Pilotes" data-pack-price="6 000 CFA">
                     <h4>Pack Installation Pilotes</h4>
                     <div class="price">6 000 <span>CFA</span></div>
                     <ul>
@@ -1026,7 +1093,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Pilotes</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Sauvegarde Express" data-pack-price="8 000 CFA">
                     <h4>Pack Sauvegarde Express</h4>
                     <div class="price">8 000 <span>CFA</span></div>
                     <ul>
@@ -1036,7 +1103,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Sauvegarder</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Réseau Wifi" data-pack-price="10 000 CFA">
                     <h4>Pack Réseau Wifi</h4>
                     <div class="price">10 000 <span>CFA</span></div>
                     <ul>
@@ -1053,7 +1120,7 @@
         <div class="pack-category">
             <h3><i class="fas fa-laptop"></i> Logiciels & Bureautique</h3>
             <div class="packs-container">
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Installation Office" data-pack-price="7 000 CFA">
                     <h4>Pack Installation Office</h4>
                     <div class="price">7 000 <span>CFA</span></div>
                     <ul>
@@ -1063,7 +1130,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Installer Office</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Adobe Reader/PDF" data-pack-price="3 000 CFA">
                     <h4>Pack Adobe Reader/PDF</h4>
                     <div class="price">3 000 <span>CFA</span></div>
                     <ul>
@@ -1073,7 +1140,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">PDF</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Navigateur Internet" data-pack-price="2 500 CFA">
                     <h4>Pack Navigateur Internet</h4>
                     <div class="price">2 500 <span>CFA</span></div>
                     <ul>
@@ -1083,7 +1150,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Navigateur</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Messagerie Outlook" data-pack-price="10 000 CFA">
                     <h4>Pack Messagerie Outlook</h4>
                     <div class="price">10 000 <span>CFA</span></div>
                     <ul>
@@ -1093,7 +1160,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Configurer Outlook</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Compression fichiers" data-pack-price="2 000 CFA">
                     <h4>Pack Compression fichiers</h4>
                     <div class="price">2 000 <span>CFA</span></div>
                     <ul>
@@ -1103,7 +1170,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Compresser</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Traduction/Traitement" data-pack-price="5 000 CFA">
                     <h4>Pack Traduction/Traitement</h4>
                     <div class="price">5 000 <span>CFA</span></div>
                     <ul>
@@ -1120,7 +1187,7 @@
         <div class="pack-category">
             <h3><i class="fas fa-user-graduate"></i> Étudiants & Particuliers</h3>
             <div class="packs-container">
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Prise en main PC" data-pack-price="6 000 CFA">
                     <h4>Pack Prise en main PC</h4>
                     <div class="price">6 000 <span>CFA</span></div>
                     <ul>
@@ -1130,7 +1197,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Débuter</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Rédaction CV" data-pack-price="5 000 CFA">
                     <h4>Pack Rédaction CV</h4>
                     <div class="price">5 000 <span>CFA</span></div>
                     <ul>
@@ -1140,7 +1207,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Créer CV</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Préparation Exposé" data-pack-price="7 500 CFA">
                     <h4>Pack Préparation Exposé</h4>
                     <div class="price">7 500 <span>CFA</span></div>
                     <ul>
@@ -1150,7 +1217,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Exposé</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Gestion Budget" data-pack-price="6 000 CFA">
                     <h4>Pack Gestion Budget</h4>
                     <div class="price">6 000 <span>CFA</span></div>
                     <ul>
@@ -1160,7 +1227,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Budget</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Cours en ligne" data-pack-price="7 000 CFA">
                     <h4>Pack Cours en ligne</h4>
                     <div class="price">7 000 <span>CFA</span></div>
                     <ul>
@@ -1170,7 +1237,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Cours en ligne</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Réseaux sociaux" data-pack-price="4 000 CFA">
                     <h4>Pack Réseaux sociaux</h4>
                     <div class="price">4 000 <span>CFA</span></div>
                     <ul>
@@ -1187,7 +1254,7 @@
         <div class="pack-category">
             <h3><i class="fas fa-store"></i> TPE & Commerçants</h3>
             <div class="packs-container">
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Facture Simple" data-pack-price="12 000 CFA">
                     <h4>Pack Facture Simple</h4>
                     <div class="price">12 000 <span>CFA</span></div>
                     <ul>
@@ -1197,7 +1264,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Facturer</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Gestion Stock" data-pack-price="15 000 CFA">
                     <h4>Pack Gestion Stock</h4>
                     <div class="price">15 000 <span>CFA</span></div>
                     <ul>
@@ -1207,7 +1274,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Gérer stock</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Caisse enregistreuse" data-pack-price="10 000 CFA">
                     <h4>Pack Caisse enregistreuse</h4>
                     <div class="price">10 000 <span>CFA</span></div>
                     <ul>
@@ -1217,7 +1284,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Caisse</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Devis pro" data-pack-price="8 000 CFA">
                     <h4>Pack Devis pro</h4>
                     <div class="price">8 000 <span>CFA</span></div>
                     <ul>
@@ -1227,7 +1294,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Devis</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Communication" data-pack-price="10 000 CFA">
                     <h4>Pack Communication</h4>
                     <div class="price">10 000 <span>CFA</span></div>
                     <ul>
@@ -1246,7 +1313,7 @@
         <div class="pack-category">
             <h3><i class="fas fa-project-diagram"></i> Solutions Odoo & ERP</h3>
             <div class="packs-container">
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Odoo Start" data-pack-price="150 000 CFA">
                     <h4>Pack Odoo Start</h4>
                     <div class="price">150 000 <span>CFA</span></div>
                     <ul>
@@ -1258,7 +1325,7 @@
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Commander</a>
                 </div>
                 
-                <div class="card price-card featured">
+                <div class="card price-card featured" data-pack-name="Pack Odoo Business" data-pack-price="450 000 CFA">
                     <div style="background:var(--primary-orange); color:white; position:absolute; top:15px; right:-35px; transform:rotate(45deg); width:150px; font-size:0.75rem; font-weight:bold; padding:6px 0; text-align:center; letter-spacing:1px;">
                         POPULAIRE
                     </div>
@@ -1274,7 +1341,7 @@
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-orange);">Demander un Audit</a>
                 </div>
                 
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Odoo Enterprise" data-pack-price="Sur Devis">
                     <h4>Pack Odoo Enterprise</h4>
                     <div class="price">Sur Devis</div>
                     <ul>
@@ -1293,7 +1360,7 @@
         <div class="pack-category">
             <h3><i class="fas fa-robot"></i> Intelligence Artificielle</h3>
             <div class="packs-container">
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack IA Découverte" data-pack-price="75 000 CFA">
                     <h4>Pack IA Découverte</h4>
                     <div class="price">75 000 <span>CFA</span></div>
                     <ul>
@@ -1305,7 +1372,7 @@
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Découvrir l'IA</a>
                 </div>
                 
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack IA Automatisation" data-pack-price="250 000 CFA">
                     <h4>Pack IA Automatisation</h4>
                     <div class="price">250 000 <span>CFA</span></div>
                     <ul>
@@ -1318,7 +1385,7 @@
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Automatiser</a>
                 </div>
                 
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack IA Avancé" data-pack-price="Sur Devis">
                     <h4>Pack IA Avancé</h4>
                     <div class="price">Sur Devis</div>
                     <ul>
@@ -1336,7 +1403,7 @@
         <div class="pack-category">
             <h3><i class="fas fa-print"></i> Imprimerie Numérique</h3>
             <div class="packs-container">
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Identité Visuelle" data-pack-price="75 000 CFA">
                     <h4>Pack Identité Visuelle</h4>
                     <div class="price">75 000 <span>CFA</span></div>
                     <ul>
@@ -1348,7 +1415,7 @@
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Commander</a>
                 </div>
                 
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Signalétique" data-pack-price="120 000 CFA">
                     <h4>Pack Signalétique</h4>
                     <div class="price">120 000 <span>CFA</span></div>
                     <ul>
@@ -1360,7 +1427,7 @@
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Équiper ma boutique</a>
                 </div>
                 
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Événementiel" data-pack-price="200 000 CFA">
                     <h4>Pack Événementiel</h4>
                     <div class="price">200 000 <span>CFA</span></div>
                     <ul>
@@ -1379,7 +1446,7 @@
         <div class="pack-category">
             <h3><i class="fas fa-laptop-code"></i> Web & Infrastructure</h3>
             <div class="packs-container">
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Site Vitrine" data-pack-price="250 000 CFA">
                     <h4>Pack Site Vitrine</h4>
                     <div class="price">250 000 <span>CFA</span></div>
                     <ul>
@@ -1392,7 +1459,7 @@
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Créer mon site</a>
                 </div>
                 
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Maintenance IT" data-pack-price="45 000 fcfa/mois">
                     <h4>Pack Maintenance IT</h4>
                     <div class="price">45 000 fcfa <span>/mois</span></div>
                     <ul>
@@ -1405,7 +1472,7 @@
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">S'abonner</a>
                 </div>
                 
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Infra Cloud" data-pack-price="95 000 fcfa/mois">
                     <h4>Pack Infra Cloud</h4>
                     <div class="price">95 000 fcfa<span>/mois</span></div>
                     <ul>
@@ -1425,7 +1492,7 @@
             <h3><i class="fas fa-graduation-cap"></i> Formation & Accompagnement Informatique</h3>
             <div class="packs-container">
                 <!-- 7 packs formation existants (repris avec classe pack-wa-btn) -->
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Formation Odoo" data-pack-price="80 000 fcfa/personne">
                     <h4>Pack Formation Odoo</h4>
                     <div class="price">80 000 fcfa <span>/personne</span></div>
                     <ul>
@@ -1436,7 +1503,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Formation Odoo</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Initiation Informatique" data-pack-price="45 000 fcfa/personne">
                     <h4>Pack Initiation Informatique</h4>
                     <div class="price">45 000 fcfa <span>/personne</span></div>
                     <ul>
@@ -1447,7 +1514,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Je débute</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Suite Microsoft Office" data-pack-price="65 000 fcfa/personne">
                     <h4>Pack Suite Microsoft Office</h4>
                     <div class="price">65 000 fcfa <span>/personne</span></div>
                     <ul>
@@ -1458,7 +1525,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Maîtriser Office</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Installation OS" data-pack-price="35 000 fcfa/session">
                     <h4>Pack Installation OS</h4>
                     <div class="price">35 000 fcfa <span>/session</span></div>
                     <ul>
@@ -1469,7 +1536,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Installer mon OS</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Logiciels & Config" data-pack-price="25 000 fcfa/session">
                     <h4>Pack Logiciels & Config</h4>
                     <div class="price">25 000 fcfa <span>/session</span></div>
                     <ul>
@@ -1479,7 +1546,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Optimiser mon PC</a>
                 </div>
-                <div class="card price-card">
+                <div class="card price-card" data-pack-name="Pack Clé Bootable" data-pack-price="15 000 fcfa/clé">
                     <h4>Pack Clé Bootable</h4>
                     <div class="price">15 000 fcfa <span>/clé</span></div>
                     <ul>
@@ -1489,7 +1556,7 @@
                     </ul>
                     <a href="#" class="btn btn-primary pack-wa-btn" style="display:block; background:var(--primary-blue);">Créer ma clé</a>
                 </div>
-                <div class="card price-card featured">
+                <div class="card price-card featured" data-pack-name="Pack Formation Sur-Mesure" data-pack-price="Sur Devis">
                     <div style="background:var(--primary-orange); color:white; position:absolute; top:15px; right:-35px; transform:rotate(45deg); width:150px; font-size:0.75rem; font-weight:bold; padding:6px 0; text-align:center; letter-spacing:1px;">
                         SUR-MESURE
                     </div>
@@ -1586,7 +1653,9 @@
             </div>
             <div class="footer-col">
                 <h4>Contactez-nous</h4>
-                <p><i class="fas fa-phone"></i> +225 07 08 43 21 72</p>
+                <!-- Mise à jour du numéro WhatsApp dans le footer -->
+                <p><i class="fab fa-whatsapp" style="color:var(--whatsapp);"></i> <a href="https://wa.me/2250797969475" style="color:white; text-decoration:none;">+225 07 97 96 94 75</a></p>
+                <p><i class="fas fa-phone"></i> +225 07 97 96 94 75</p>
                 <p><i class="fas fa-envelope"></i> contact@manawatechs.ci</p>
                 <p><i class="fas fa-map-marker-alt"></i> San-Pedro / Abidjan, CI</p>
                 <div style="margin-top:20px;">
@@ -1710,31 +1779,127 @@
         });
 
         // =============================================================
-        // FONCTIONNALITE DEMANDEE : Boutons des packs -> WhatsApp
+        // FONCTIONNALITE AMELIOREE : Boutons des packs -> WhatsApp avec capture d'écran
         // =============================================================
-        // Numéro cible
-        const whatsappNumber = '2250708432172';  // sans le + pour l'API
+        // Nouveau numéro WhatsApp
+        const whatsappNumber = '2250797969475';  // sans le + pour l'API
+
+        // Fonction pour capturer une carte spécifique
+        async function captureCard(cardElement) {
+            try {
+                // S'assurer que la carte est visible et stylisée
+                cardElement.style.transform = 'scale(1)';
+                cardElement.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
+                cardElement.style.zIndex = '10000';
+                cardElement.style.position = 'relative';
+                
+                // Capturer la carte
+                const canvas = await html2canvas(cardElement, {
+                    scale: 2, // Haute qualité
+                    backgroundColor: '#ffffff',
+                    logging: false,
+                    allowTaint: true,
+                    useCORS: true
+                });
+                
+                // Restaurer les styles
+                cardElement.style.transform = '';
+                cardElement.style.boxShadow = '';
+                cardElement.style.zIndex = '';
+                cardElement.style.position = '';
+                
+                // Convertir en base64
+                return canvas.toDataURL('image/png');
+            } catch (error) {
+                console.error('Erreur lors de la capture:', error);
+                return null;
+            }
+        }
+
+        // Fonction pour envoyer l'image via WhatsApp
+        function sendToWhatsAppWithImage(imageData, packName, packPrice, packDetails) {
+            // Créer un message détaillé
+            let details = packDetails || '';
+            let detailsText = '';
+            
+            if (details.length > 0) {
+                detailsText = '\n\n📋 *Détails du pack:*\n';
+                details.forEach(item => {
+                    detailsText += `✅ ${item}\n`;
+                });
+            }
+            
+            const message = encodeURIComponent(
+                `👋 *Bonjour Manawa Techs!*\n\n` +
+                `Je suis intéressé par le pack suivant:\n\n` +
+                `📦 *${packName}*\n` +
+                `💰 *Prix: ${packPrice}*\n` +
+                `${detailsText}\n` +
+                `📸 *Capture d'écran du pack ci-jointe*\n\n` +
+                `Pouvez-vous me donner plus d'informations et me confirmer la disponibilité ?\n\n` +
+                `Merci! 🙏`
+            );
+            
+            // Ouvrir WhatsApp
+            window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+        }
 
         // Sélectionner tous les boutons avec la classe 'pack-wa-btn' (dans les packs)
         document.querySelectorAll('.pack-wa-btn').forEach(button => {
-            button.addEventListener('click', function(event) {
+            button.addEventListener('click', async function(event) {
                 event.preventDefault();  // Empêche tout comportement par défaut (lien vide #)
 
-                // Récupérer le nom du pack (titre h4) pour personnaliser le message
+                // Afficher le loader
+                const loader = document.getElementById('captureLoader');
+                loader.classList.add('show');
+
+                // Récupérer la carte parent
                 const parentCard = this.closest('.price-card');
-                let packName = 'un pack Manawa Techs';
+                
                 if (parentCard) {
-                    const titleElement = parentCard.querySelector('h4');
-                    if (titleElement) {
-                        packName = titleElement.innerText.trim();
+                    // Récupérer les informations du pack
+                    const packName = parentCard.dataset.packName || parentCard.querySelector('h4').innerText.trim();
+                    const packPrice = parentCard.dataset.packPrice || 'Prix sur demande';
+                    
+                    // Récupérer les détails du pack
+                    const detailsItems = parentCard.querySelectorAll('ul li');
+                    const packDetails = [];
+                    detailsItems.forEach(item => {
+                        packDetails.push(item.innerText.trim());
+                    });
+
+                    try {
+                        // Capturer la carte
+                        const imageData = await captureCard(parentCard);
+                        
+                        // Cacher le loader
+                        loader.classList.remove('show');
+                        
+                        // Envoyer vers WhatsApp avec l'image et les détails
+                        sendToWhatsAppWithImage(imageData, packName, packPrice, packDetails);
+                        
+                    } catch (error) {
+                        console.error('Erreur:', error);
+                        loader.classList.remove('show');
+                        
+                        // Fallback: envoyer sans image en cas d'erreur
+                        const message = encodeURIComponent(
+                            `👋 *Bonjour Manawa Techs!*\n\n` +
+                            `Je suis intéressé par le pack suivant:\n\n` +
+                            `📦 *${packName}*\n` +
+                            `💰 *Prix: ${packPrice}*\n\n` +
+                            `Pouvez-vous me donner plus d'informations ?`
+                        );
+                        window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
                     }
+                } else {
+                    // Fallback si la carte n'est pas trouvée
+                    loader.classList.remove('show');
+                    const message = encodeURIComponent(
+                        `👋 Bonjour Manawa Techs! Je suis intéressé par vos services. Pouvez-vous me donner plus d'informations ?`
+                    );
+                    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
                 }
-
-                // Message pré-rempli pour le client
-                const message = encodeURIComponent(`Bonjour, je suis intéressé par le pack "${packName}". Pouvez-vous me donner plus d'informations ?`);
-
-                // Ouvrir WhatsApp dans un nouvel onglet/fenêtre
-                window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
             });
         });
         // =============================================================
